@@ -37,6 +37,15 @@ class Budget
           self.group_id   ||= investment.try(:group_id)
           self.budget_id  ||= investment.try(:budget_id)
         end
+
+        def store_user_heading
+          return if heading.id == city_heading_id
+          ballot.user.update(balloted_heading_id: heading.id) unless ballot.physical == true
+        end
+
+        def city_heading_id
+          1
+        end
     end
   end
 end
